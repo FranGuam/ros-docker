@@ -14,13 +14,14 @@ Supported Platforms: `Linux`, `Windows`, `WSL`
 
 - 设备平台符合要求（暂不支持`macOS`）
 - 已安装`Docker`和`Docker Compose`（官方文档：[Docker](https://docs.docker.com/get-docker/)、[Docker Compose](https://docs.docker.com/compose/install/)）
+   - 如果在`WSL`中操作，还需启用`Docker Desktop`的`WSL Integration`功能（方法详见[官方文档](https://docs.docker.com/desktop/features/wsl/#enabling-docker-support-in-wsl-2-distributions)）
 - 已安装至少一种主流 IDE（推荐使用`VSCode`）
 
-##### 使用 DevContainer (开箱即用)
+##### 使用 DevContainer（开箱即用）
 
 1. 根据设备平台，选择对应的`docker-compose.{Platform}.yml`文件填入`devcontainer.json`中的`dockerComposeFile`。
 
-   > 注意，这里的设备平台指的是代码所在的位置，如果你的代码文件夹已经在某个`WSL`分发版本（如`Ubuntu`）的虚拟磁盘中，且希望通过`WSL`分发版本中安装的`docker`进行开发（而非`Docker Desktop`），那么应该选择`docker-compose.wsl.yml`
+   > 注意：这里的设备平台指的是代码/终端所在的位置，如果你的代码文件夹已经在某个`WSL`分发版本（如`Ubuntu`）的虚拟磁盘中，且已经使用`VSCode`的`Connect to WSL`功能打开，那么应该选择`docker-compose.wsl.yml`
 
 2. 使用`VSCode`打开项目文件夹，点击左下角绿色图标，在正上方弹出的菜单中选择`Reopen in Container`即可。
 
@@ -36,14 +37,14 @@ Supported Platforms: `Linux`, `Windows`, `WSL`
 
 1. 根据设备平台，选择对应的`docker-compose.{Platform}.yml`文件，修改其中的`volumes`字段，添加一个条目将项目文件夹映射到容器中，示例如下：
 
-   > 注意，这里的设备平台指的是代码所在的位置，如果你的代码文件夹已经在某个`WSL`分发版本（如`Ubuntu`）的虚拟磁盘中，且希望通过`WSL`分发版本中安装的`docker`进行开发（而非`Docker Desktop`），那么应该选择`docker-compose.wsl.yml`
+   > 注意：这里的设备平台指的是代码/终端所在的位置，如果你的代码文件夹已经在某个`WSL`分发版本（如`Ubuntu`）的虚拟磁盘中，且计划使用`WSL`终端执行以下命令，那么应该选择`docker-compose.wsl.yml`
 
    ```yaml
    volumes:
      - ../:/workspace
    ```
 
-   > 注意，这里的`/workspace`是容器中的目录，可以根据需要修改。
+   > 注意：这里的`/workspace`是容器中的目录，可以根据需要修改。
 
 2. 执行以下命令启动容器。
 
@@ -76,6 +77,8 @@ Supported Platforms: `Linux`, `Windows`, `WSL`
 ```
 
 之后，重新按照“使用 DevContainer”或“手动启动 Docker 容器并连接”部分所述的步骤操作即可。
+
+> 本仓库构建的镜像并不会定期更新，建议用户搭建环境完成后升级全部依赖（`apt upgrade`）
 
 ### 实用命令
 
