@@ -1,4 +1,5 @@
 {
+  "name": "ROS Noetic",
   "dockerComposeFile": "docker-compose.linux.yml", // Edit here
   "service": "ros",
   "mounts": ["source=${localWorkspaceFolder},target=/workspace,type=bind"],
