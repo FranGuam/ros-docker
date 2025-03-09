@@ -1,0 +1,25 @@
+services:
+  ros:
+    container_name: ros
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - DISPLAY=novnc:0.0
+    command: bash -c "roscore"
+    networks:
+      - X11
+  novnc:
+    container_name: novnc
+    image: theasp/novnc:latest
+    environment:
+      - DISPLAY_WIDTH=1920
+      - DISPLAY_HEIGHT=1080
+      - RUN_XTERM=no
+      - RUN_FLUXBOX=yes
+    ports:
+      - "8080:8080"
+    networks:
+      - X11
+networks:
+  X11:
